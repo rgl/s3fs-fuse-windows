@@ -9,4 +9,6 @@ Vagrant.configure(2) do |config|
   end
   config.vm.provision "shell", inline: "$env:chocolateyVersion = '2.7.3'; Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')", name: "Install Chocolatey"
   config.vm.provision "shell", path: "setup.ps1"
+  config.vm.provision "shell", path: "build.ps1"
+  config.vm.provision "shell", path: "test.ps1"
 end
