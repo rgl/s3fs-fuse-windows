@@ -65,8 +65,11 @@ choco install -y msys2 --params '/NoPath'
 # configure the msys2 launcher to let the shell inherit the PATH.
 $msys2BasePath = 'C:\tools\msys64'
 @(
-    'msys2.ini'
+    'clang64.ini'
+    'mingw32.ini'
     'mingw64.ini'
+    'msys2.ini'
+    'ucrt64.ini'
 ) | ForEach-Object {
     $msys2ConfigPath = "$msys2BasePath\$_"
     [IO.File]::WriteAllText(

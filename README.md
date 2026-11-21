@@ -59,12 +59,12 @@ Get-ChildItem -Recurse a: | ForEach-Object { $_.FullName } | Sort-Object
 
 ## Build (in a Ubuntu host)
 
-Install the [windows-2022-uefi-amd64 vagrant box](https://github.com/rgl/windows-vagrant).
+Install the [windows-2025-uefi-amd64 vagrant box](https://github.com/rgl/windows-vagrant).
 
 Build the `s3fs-fuse.zip` binary artifact:
 
 ```bash
-vagrant up --no-destroy-on-error --provider=libvirt
+vagrant up --no-destroy-on-error --provider=libvirt | tee build.log
 ls -laF s3fs-fuse.zip
 vagrant destroy -f
 ```

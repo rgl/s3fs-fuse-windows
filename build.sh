@@ -5,9 +5,9 @@ set -eux
 S3FS_VERSION="v1.97"
 
 # install the winfsp dependency.
-# see https://github.com/winfsp/winfsp/releases/tag/v2.1
+# see https://github.com/winfsp/winfsp/releases/tag/v2.2
 # see https://community.chocolatey.org/packages/winfsp
-choco install --no-progress -y winfsp --version 2.1.25156
+choco install --no-progress -y winfsp --version 2.2.26323
 
 # install dependencies.
 pacman --noconfirm --needed -Sy \
@@ -32,7 +32,7 @@ pushd s3fs-fuse
 
 # create the fuse3 pkg-config definition.
 cp -r "/c/Program Files (x86)/WinFsp" WinFsp
-# see https://github.com/winfsp/winfsp/blob/v2.1/src/dll/fuse3/fuse3.pc.in
+# see https://github.com/winfsp/winfsp/blob/v2.2/src/dll/fuse3/fuse3.pc.in
 cat > ./fuse3.pc << 'EOS'
 arch=x64
 prefix=${pcfiledir}/WinFsp
@@ -51,7 +51,7 @@ EOS
 # see https://github.com/s3fs-fuse/s3fs-fuse/blob/master/COMPILATION.md#compilation-on-windows-using-msys2
 ./autogen.sh
 PKG_CONFIG_PATH="${PKG_CONFIG_PATH:-}:$(pwd)" ./configure
-make CXXFLAGS="-I/usr/include"
+make CXXFLAGS="-include climits -I/usr/include"
 
 # package.
 rm -rf bin
